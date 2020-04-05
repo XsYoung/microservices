@@ -1,0 +1,23 @@
+server:
+  port: 8000
+  servlet:
+    session:
+      cookie:
+        name: OAUTH2SESSION
+spring:
+  application:
+    name: xsy-security
+  #数据源配置
+  datasource:
+    url: jdbc:mysql://${xsy.datasource.ip}:3306/oauth-center?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    hikari:
+      username: ${xsy.datasource.username}
+      password: ${xsy.datasource.password}
+      # >= 6.x: com.mysql.cj.jdbc.Driver
+      # <= 5.x: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
+encrypt:
+  key-store:
+    location: classpath:zlt.jks
+    secret: zlt!@#$
+    alias: zlt

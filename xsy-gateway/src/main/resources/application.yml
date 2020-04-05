@@ -1,0 +1,76 @@
+server:
+  port: 9000
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+spring:
+  application:
+    name: xsy-gateway
+zuul:
+  ribbon-isolation-strategy: thread
+  ribbon:
+    eager-load:
+      enabled: true
+    threadPool:
+      useSeparateThreadPools: true
+      threadPoolKeyPrefix: api-gateway
+  #关闭重试
+  retryable: false
+  ignored-headers: Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Access-Control-Allow-Methods
+  add-host-header: true
+  routes:
+    auth:
+      path: /api-uaa/**
+      service-id: xsy-security
+      strip-prefix: true
+      sensitive-headers: '*'
+      custom-sensitive-headers: true
+    auth-login-page:
+      path: /login.html
+      service-id: xsy-security
+      strip-prefix: true
+      sensitive-headers: '*'
+      custom-sensitive-headers: true
+    auth-login-process:
+      path: /user/login
+      service-id: xsy-security
+      strip-prefix: true
+      sensitive-headers: '*'
+      custom-sensitive-headers: true
+    auth-login-token:
+      path: /oauth/token
+      service-id: xsy-security
+      strip-prefix: true
+      sensitive-headers: '*'
+      custom-sensitive-headers: true
+    auth-login-authorize:
+      path: /oauth/authorize
+      service-id: xsy-security
+      strip-prefix: true
+      sensitive-headers: '*'
+      custom-sensitive-headers: true
+  ssl-hostname-validation-enabled: false
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 100
+      maximumSize: 2000
+      allowMaximumSizeToDivergeFromCoreSize: true
+      maxQueueSize: -1
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+xsy:
+  security:
+    ignore:
+      # 忽略认证的地址
+      httpUrls: >
+        /security/oauth/**,
+        /oauth/**,
+        /user/login,
+        /login

@@ -1,0 +1,30 @@
+########################## 统一变量配置 ##########################
+##### 数据库配置
+xsy:
+  datasource:
+    ip:
+    username:
+    password:
+
+##### redis配置
+spring:
+  redis:
+    host:
+    port: 5009
+    database: 1
+    tomeout: 5000
+
+##### elasticsearch配置
+
+##### sentinel配置
+
+##### fastDFS配置
+
+##### 日志链路追踪
+
+##### 负载均衡隔离(version隔离，只适用于开发环境)
+
+##### mybatis-plus打印完整sql(只适用于开发环境)
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

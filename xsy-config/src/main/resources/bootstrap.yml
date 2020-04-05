@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        file-extension: yml
+        shared-dataids: common.yml
+        refreshable-dataids: common.yml
+##### 允许bean覆盖
+  main:
+    allow-bean-definition-overriding: true
+##### 默认开发环境
+  profiles:
+    active: dev
+##### spring-boot-actuator配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
